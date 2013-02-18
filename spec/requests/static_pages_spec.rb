@@ -8,6 +8,22 @@ describe "Static pages" do
     it { should have_selector('title', text: full_title(page_title)) }
   end
 
+  it "should have the right links on the layout" do
+    visit root_path
+    click_link "About"
+    should have_selector 'title', text: full_title('About us')
+    click_link "Help"
+    should have_selector 'title', text: full_title('Help')
+    click_link "Contact"
+    should have_selector 'title', text: full_title('Contact')
+    click_link "Home"
+    should have_selector 'title', text: full_title('')
+    click_link "Sign up now!"
+    should have_selector 'title', text: full_title('Sign up')
+    click_link "sample app"
+    should have_selector 'title', text: full_title('')
+  end
+
   describe "Home page" do
     before { visit root_path }
     let(:heading) { 'Sample App' }
@@ -40,4 +56,6 @@ describe "Static pages" do
 
     it_should_behave_like "all static pages" 
   end
+
+
 end
